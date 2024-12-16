@@ -48,11 +48,8 @@ export default function Contact() {
       
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', message: '' });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => setSubmitStatus('idle'), 5000);
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error('Error submitting form:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -62,6 +59,7 @@ export default function Contact() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
@@ -111,20 +109,19 @@ export default function Contact() {
               </div>
             )}
 
-            <div className="grid grid-cols-1 gap-6">
+            <div className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-stone-700">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Nom complet
                 </label>
                 <input
                   type="text"
-                  id="name"
                   name="name"
+                  id="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 ${
-                    errors.name ? 'border-red-300' : 'border-stone-300'
-                  }`}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  required
                 />
                 {errors.name && (
                   <p className="mt-1 text-sm text-red-600">{errors.name}</p>
@@ -132,18 +129,17 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-stone-700">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email
                 </label>
                 <input
                   type="email"
-                  id="email"
                   name="email"
+                  id="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 ${
-                    errors.email ? 'border-red-300' : 'border-stone-300'
-                  }`}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  required
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -151,18 +147,17 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-stone-700">
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                   Téléphone
                 </label>
                 <input
                   type="tel"
-                  id="phone"
                   name="phone"
+                  id="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 ${
-                    errors.phone ? 'border-red-300' : 'border-stone-300'
-                  }`}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  required
                 />
                 {errors.phone && (
                   <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
@@ -170,18 +165,17 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-stone-700">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700">
                   Message
                 </label>
                 <textarea
-                  id="message"
                   name="message"
+                  id="message"
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 ${
-                    errors.message ? 'border-red-300' : 'border-stone-300'
-                  }`}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  required
                 />
                 {errors.message && (
                   <p className="mt-1 text-sm text-red-600">{errors.message}</p>

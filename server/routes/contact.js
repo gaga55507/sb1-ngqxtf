@@ -1,8 +1,13 @@
+// server/routes/contact.js
 import express from 'express';
 import { sendContactEmail } from '../services/email.js';
 import { validateContactForm } from '../validators/contact.js';
 
 export const contactRouter = express.Router();
+
+contactRouter.get('/test', (req, res) => {
+  res.json({ message: 'Server is running!' });
+});
 
 contactRouter.post('/', async (req, res) => {
   try {
